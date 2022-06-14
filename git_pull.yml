@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+
+  vars:
+    UserName: gdcorp-registry
+    SourceCode_loc: /Ansible/Git_Source_Code  
+  tasks:
+    - name: To pull code from SCM
+      git:
+        repo: git@github.com:{{ UserName }}/{{ RepoName }}.git
+        dest: "{{ SourceCode_loc }}/{{ RepoName }}"
+        version: "{{BranchName}}"
+        update: yes
+        force: yes
+
+    - name: To Bundle the source code
+      archive:
+        path: "{{ SourceCode_loc }}/{{ RepoName }}"
+        dest: "{{ SourceCode_loc }}/{{ RepoName }}.tgz"

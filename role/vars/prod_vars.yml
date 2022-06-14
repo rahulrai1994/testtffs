@@ -1,0 +1,10 @@
+---
+# vars file for php-deployment
+
+src_location: /Ansible/Git_Source_Code/{{RepoName}}.tgz
+dest_location: /var/www/html
+Secret_Id: About-Us-App 
+S3_Bucket:  gd-registryweb-prod-app-code-s3
+Region: us-east-1
+IAM_Role: registryweb-custom-Registry-Website-Iam-s3
+smtp_file: /Ansible/Scripts/smtp_pass.txt

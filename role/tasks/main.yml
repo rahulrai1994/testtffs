@@ -1,0 +1,108 @@
+#---
+## tasks file for php-deployment
+- include_vars: qa_vars.yml
+  when: global_platform == "qa"
+
+- include_vars: prod_vars.yml
+  when: global_platform == "prod"
+
+- name: Get build number
+  local_action: shell file=$((`cat local_counter.txt`)); echo $file | tee local_counter.txt
+  register: file_num
+  when: BranchName == 'main'
+  
+- name: To set the value
+  set_fact: File_Num="{{ file_num.stdout }}"
+  when: file_num.changed
+
+- name: Get build number
+  local_action: shell file=$((`cat local_counter_redesign.txt`)); echo $file | tee local_counter_redesign.txt
+  register: file_num
+  when: BranchName == 'about-us-redesign'
+
+- name: To set the value
+  set_fact: File_Num="{{ file_num.stdout }}"
+  when: file_num.changed
+
+- name: To create a build directory on application server
+  file:
+    path: "/{{ dest_location }}/{{ File_Num }}"
+    state: directory
+
+- name: To untar the package at desired location on application server
+  ansible.builtin.unarchive:
+    src: "{{ src_location }}"
+    dest: "/{{ dest_location }}/{{ File_Num }}"
+    extra_opts: [--strip-components=1]
+
+- name: To retrive value from AWS Secret Manager
+  set_fact: Crediantials="{{ lookup('aws_secret', '{{ Secret_Id }}' , region='us-east-1') }}"
+
+- name: To replace secret values in actual code
+  import_tasks: replacement.yml
+
+- name: Install composer for php
+  shell: curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer; /usr/local/bin/composer self-update --1
+
+- name: create a symbolic link at destination location after untar of code
+  file:
+    src: "{{ dest_location }}/{{ File_Num }}"
+    dest: "{{ dest_location }}/{{ RepoName }}"
+    state: link
+    force: yes
+  notify:
+    - restart php-fpm
+    - restart nginx
+
+- name: Install composer with its dependices
+  community.general.composer:
+    command: install
+    working_dir: /{{ dest_location }}/{{ File_Num }}/
+
+- name: To run the handlers at this task , not at the end of play
+  meta: flush_handlers
+
+- name: To check the applciation response code
+  uri:
+    url: "http://127.0.0.1:80/"
+    status_code: 200,301
+  register: result
+  retries: 4
+  delay: 3
+  ignore_errors: yes
+
+- name: To find out the latest built if code not working out
+  shell: cd {{ dest_location }};ls -td -- */ | grep -v {{ RepoName }}|head -n 2 |tail -n 1| cut -d'/' -f1
+  register: success_build
+  when: result.status not in [200,301]
+
+- name: To roll back if code not working out
+  file:
+    src: "{{ dest_location }}/{{ success_build.stdout }}"
+    dest: "{{ dest_location }}/{{ RepoName }}"
+    state: link
+    force: yes
+  when: result.status not in [200,301]
+
+- name: To delete the older built if code not working out
+  command: rm -rf "{{ dest_location }}/{{ File_Num }}"
+  when: result.status not in [200,301]
+  notify: restart nginx
+
+- name: Push the success build to s3
+  command: "aws s3 cp {{ dest_location }}/{{ RepoName }} s3://{{ S3_Bucket }}/{{ RepoName }}/{{ File_Num }}/ --recursive"
+  when: result.status in [200,301]
+
+- name: Send email to mark the build as success build
+  mail:
+    host: "{{ lookup('ini' ,'smtp_host section=prod file={{smtp_file}}') }}"
+    port: "{{ lookup('ini' ,'smtp_port section=prod file={{smtp_file}}') }}"
+    username: "{{ lookup('ini' ,'smtp_username section=prod file={{smtp_file}}') }}"
+    password: "{{ lookup('ini' ,'smtp_password section=prod file={{smtp_file}}') }}"
+    from: "{{ lookup('ini' ,'smtp_from section=prod file={{smtp_file}}') }}"
+    to: "{{ lookup('ini' ,'smtp_to section=prod file={{smtp_file}}') }}"
+    cc: "{{ lookup('ini' ,'smtp_cc section=prod file={{smtp_file}}') }}"
+    subject: "Ansible Deployment Success"
+    subtype: html
+    body: '{{ lookup("template", "/Ansible/Scripts/email_success.html") }}'
+    secure: starttls

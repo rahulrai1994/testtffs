@@ -1,0 +1,123 @@
+---
+
+- name: Replace the variables according to files defined in this task
+  replace:
+    path: "{{ item.path }}"
+    regexp: "{{ item.regexp }}"
+    replace: "{{ item.replace }}"
+  with_items:
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/blog/article.phtml' , regexp: 'SHARE_THIS_PROPERTY_TOKEN' , replace: '{{ Crediantials.SHARE_THIS_PROPERTY_TOKEN }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/blog/category.phtml' , regexp: 'SHARE_THIS_PROPERTY_TOKEN' , replace: '{{ Crediantials.SHARE_THIS_PROPERTY_TOKEN }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/blog/category.phtml' , regexp: 'CATEGORY_FORM_DATA_ID' , replace: '{{ Crediantials.CATEGORY_FORM_DATA_ID }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/townhall/index.phtml' , regexp: 'FORM_DATA_ID' , replace: '{{ Crediantials.FORM_DATA_ID }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/blog/index.phtml' , regexp: 'BLOG_FORM_DATA_ID' , replace: '{{ Crediantials.BLOG_FORM_DATA_ID }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/layout/_stakeholder-council-alt.phtml' , regexp: 'STAKEHOLDER_FORM_DATA_ID' , replace: '{{ Crediantials.STAKEHOLDER_FORM_DATA_ID }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/layout/_map.phtml' , regexp: 'LABEL_GENERATOR_STR' , replace: '{{ Crediantials.LABEL_GENERATOR_STR}}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/layout/_map.phtml' , regexp: 'GOOGLE_MAP_KEY' , replace: '{{ Crediantials.GOOGLE_MAP_KEY }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/layout/_stakeholder-council.phtml' , regexp: 'TBN_URL_TOKEN' , replace: '{{ Crediantials.TBN_URL_TOKEN }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/layout/footer.phtml' , regexp: 'YOUTUBE_CHANNEL_ID' , replace: '{{ Crediantials.YOUTUBE_CHANNEL_ID}}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/retailpartners/index.phtml' , regexp: 'YOUTUBE_PLAYLIST_ID' , replace: '{{ Crediantials.YOUTUBE_PLAYLIST_ID }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/assets/PDF-Flip/pflip/js/libs/pdf.worker.js' , regexp: 'DIGIT_GENERATOR_STR' , replace: '{{ Crediantials.DIGIT_GENERATOR_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/assets/PDF-Flip/pflip/js/libs/compatibility.js' , regexp: 'DIGIT_GENERATOR_STR' , replace: '{{ Crediantials.DIGIT_GENERATOR_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/assets/PDF-Flip/pflip/js/libs/pdf.min.js' , regexp: 'DIGIT_GENERATOR_STR' , replace: '{{ Crediantials.DIGIT_GENERATOR_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/assets/PDF-Flip/pflip/js/libs/pdf.min.js' , regexp: 'RANDOM_STR' , replace: '{{ Crediantials.RANDOM_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/assets/PDF-Flip/pflip/js/libs/pdf.worker.min.js' , regexp: 'DIGIT_GENERATOR_STR' , replace: '{{ Crediantials.DIGIT_GENERATOR_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/assets/PDF-Flip/pflip/js/libs/three.min.js' , regexp: 'RANDOM_STR_GENERATOR' , replace: '{{ Crediantials.RANDOM_STR_GENERATOR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/assets/PDF-Flip/pflip/js/pdfflip.js' , regexp: 'DIGIT_GENERATOR_STR' , replace: '{{ Crediantials.DIGIT_GENERATOR_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/js/additional-methods.min.js' , regexp: 'IBAN_GENERATOR_STR' , replace: '{{ Crediantials.IBAN_GENERATOR_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/js/additional-methods.min.js' , regexp: 'SHORT_RANDOM_STR' , replace: '{{ Crediantials.SHORT_RANDOM_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/MyConnectedWorld/index.php' , regexp: 'MKT_TOK_STR' , replace: '{{ Crediantials.MKT_TOK_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/america/faq/index_files/addthis_widget.js' , regexp: 'RANDOM_STR_GENERATOR_INPUT' , replace: '{{ Crediantials.RANDOM_STR_GENERATOR_INPUT }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/america/faq/index_files/addthis_widget.js' , regexp: 'GIF_IMAGE_FILENAME' , replace: '{{ Crediantials.GIF_IMAGE_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/america/faq/index_files/addthis_widget.js' , regexp: 'HTML_FILENAME' , replace: '{{ Crediantials.HTML_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/america/faq/index_files/addthis_widget.js' , regexp: 'CONVERSION_INPUT_STR' , replace: '{{ Crediantials.CONVERSION_INPUT_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/fishackathon/faq/index_files/addthis_widget.js' , regexp: 'HTML_FILENAME' , replace: '{{ Crediantials.HTML_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/fishackathon/faq/index_files/addthis_widget.js' , regexp: 'GIF_IMAGE_FILENAME' , replace: '{{ Crediantials.GIF_IMAGE_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/fishackathon/faq/index_files/addthis_widget.js' , regexp: 'RANDOM_STR_GENERATOR_INPUT' , replace: '{{ Crediantials.RANDOM_STR_GENERATOR_INPUT }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/fishackathon/faq/index_files/addthis_widget.js' , regexp: 'CONVERSION_INPUT_STR' , replace: '{{ Crediantials.CONVERSION_INPUT_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/HackerNest/faq/index_files/addthis_widget.js' , regexp: 'HTML_FILENAME' , replace: '{{ Crediantials.HTML_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/HackerNest/faq/index_files/addthis_widget.js' , regexp: 'GIF_IMAGE_FILENAME' , replace: '{{ Crediantials.GIF_IMAGE_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/HackerNest/faq/index_files/addthis_widget.js' , regexp: 'RANDOM_STR_GENERATOR_INPUT' , replace: '{{ Crediantials.RANDOM_STR_GENERATOR_INPUT }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/HackerNest/faq/index_files/addthis_widget.js' , regexp: 'CONVERSION_INPUT_STR' , replace: '{{ Crediantials.CONVERSION_INPUT_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/lp/Dreamwithus/faq/index_files/addthis_widget.js' , regexp: 'HTML_FILENAME' , replace: '{{ Crediantials.HTML_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/lp/Dreamwithus/faq/index_files/addthis_widget.js' , regexp: 'GIF_IMAGE_FILENAME' , replace: '{{ Crediantials.GIF_IMAGE_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/lp/Dreamwithus/faq/index_files/addthis_widget.js' , regexp: 'RANDOM_STR_GENERATOR_INPUT' , replace: '{{ Crediantials.RANDOM_STR_GENERATOR_INPUT }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/lp/Dreamwithus/faq/index_files/addthis_widget.js' , regexp: 'CONVERSION_INPUT_STR' , replace: '{{ Crediantials.CONVERSION_INPUT_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/MyConnectedWorld/faq/index_files/addthis_widget.js' , regexp: 'HTML_FILENAME' , replace: '{{ Crediantials.HTML_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/MyConnectedWorld/faq/index_files/addthis_widget.js' , regexp: 'GIF_IMAGE_FILENAME' , replace: '{{ Crediantials.GIF_IMAGE_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/MyConnectedWorld/faq/index_files/addthis_widget.js' , regexp: 'RANDOM_STR_GENERATOR_INPUT' , replace: '{{ Crediantials.RANDOM_STR_GENERATOR_INPUT }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/MyConnectedWorld/faq/index_files/addthis_widget.js' , regexp: 'CONVERSION_INPUT_STR' , replace: '{{ Crediantials.CONVERSION_INPUT_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/podcast/faq/index_files/addthis_widget.js' , regexp: 'HTML_FILENAME' , replace: '{{ Crediantials.HTML_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/podcast/faq/index_files/addthis_widget.js' , regexp: 'GIF_IMAGE_FILENAME' , replace: '{{ Crediantials.GIF_IMAGE_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/podcast/faq/index_files/addthis_widget.js' , regexp: 'RANDOM_STR_GENERATOR_INPUT' , replace: '{{ Crediantials.RANDOM_STR_GENERATOR_INPUT }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/podcast/faq/index_files/addthis_widget.js' , regexp: 'CONVERSION_INPUT_STR' , replace: '{{ Crediantials.CONVERSION_INPUT_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/scholarship-terms/index_files/addthis_widget.js' , regexp: 'HTML_FILENAME' , replace: '{{ Crediantials.HTML_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/scholarship-terms/index_files/addthis_widget.js' , regexp: 'GIF_IMAGE_FILENAME' , replace: '{{ Crediantials.GIF_IMAGE_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/scholarship-terms/index_files/addthis_widget.js' , regexp: 'RANDOM_STR_GENERATOR_INPUT' , replace: '{{ Crediantials.RANDOM_STR_GENERATOR_INPUT }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/scholarship-terms/index_files/addthis_widget.js' , regexp: 'CONVERSION_INPUT_STR' , replace: '{{ Crediantials.CONVERSION_INPUT_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/spaceapps/faq/index_files/addthis_widget.js' , regexp: 'HTML_FILENAME' , replace: '{{ Crediantials.HTML_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/spaceapps/faq/index_files/addthis_widget.js' , regexp: 'GIF_IMAGE_FILENAME' , replace: '{{ Crediantials.GIF_IMAGE_FILENAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/spaceapps/faq/index_files/addthis_widget.js' , regexp: 'RANDOM_STR_GENERATOR_INPUT' , replace: '{{ Crediantials.RANDOM_STR_GENERATOR_INPUT }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/spaceapps/faq/index_files/addthis_widget.js' , regexp: 'CONVERSION_INPUT_STR' , replace: '{{ Crediantials.CONVERSION_INPUT_STR }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/config/autoload/global.php' , regexp: 'ses_smtp_name' , replace: '{{ Crediantials.ses_smtp_name }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/config/autoload/global.php' , regexp: 'ses_smtp_host' , replace: '{{ Crediantials.ses_smtp_host }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/config/autoload/global.php' , regexp: 'ses_smtp_port' , replace: '{{ Crediantials.ses_smtp_port }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/config/autoload/global.php' , regexp: 'ses_smtp_username' , replace: '{{ Crediantials.ses_smtp_username }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/config/autoload/global.php' , regexp: 'ses_smtp_password' , replace: '{{ Crediantials.ses_smtp_password }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/config/autoload/global.php' , regexp: 'ses_smtp_protocol' , replace: '{{ Crediantials.ses_smtp_protocol }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/config/autoload/global.php' , regexp: 'database_username' , replace: '{{ Crediantials.database_username }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/config/autoload/global.php' , regexp: 'database_password' , replace: '{{ Crediantials.database_password }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/config/autoload/global.php' , regexp: 'db_name' , replace: '{{ Crediantials.db_name }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/config/autoload/global.php' , regexp: 'db_host' , replace: '{{ Crediantials.db_host }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/config/autoload/global.php' , regexp: 'API_HOST' , replace: '{{ Crediantials.API_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/data/registrars/registrars.json' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/config/module.config.php' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/src/About/Blog/GetBlogService.php' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/src/About/ChannelPartners/ChannelPartnersService.php' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/src/About/Controller/DreamwithusController.php' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/src/About/Controller/ThankfulforusController.php' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/src/About/Lookup/GetLookupService.php' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/src/About/Search/GetSearchService.php' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/src/About/WhoIs/GetWhoIsService.php' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/test/Bootstrap.php' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/domain-lookup-premium/index.phtml' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/lookup/index.phtml' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/whosusing/index.phtml' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/whosusing/index.phtml' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/lookup/index.phtml' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/layout/dreamwithus/header_home.phtml' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/layout/thankfulforus/header_home.phtml' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/america/js/app.js' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/fishackathon/js/app.js' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/HackerNest/js/app.js' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/lp/civic/index.html' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/lp/Dreamwithus/index.html' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/lp/Dreamwithus/js/register.js' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/lp/small-business/index.html' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/lp/thankfulforus/js/register.js' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/lp/ThisIsUs/index.html' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/lp/ThisIsUs/js/register.js' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/lp/veterans/index.html' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/MyConnectedWorld/index.php' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/podcast/js/app.js' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/spaceapps/js/app.js' , regexp: 'WEBSITE_HOST_NAME' , replace: '{{ Crediantials.WEBSITE_HOST_NAME }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/faqs/index.phtml' , regexp: 'FORMS_NEUSTAR_BIZ_HOST' , replace: '{{ Crediantials.FORMS_NEUSTAR_BIZ_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/resources/statistics.phtml' , regexp: 'FORMS_NEUSTAR_BIZ_HOST' , replace: '{{ Crediantials.FORMS_NEUSTAR_BIZ_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/retailpartners/index.phtml' , regexp: 'FORMS_NEUSTAR_BIZ_HOST' , replace: '{{ Crediantials.FORMS_NEUSTAR_BIZ_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/america/index.php' , regexp: 'FORMS_NEUSTAR_BIZ_HOST' , replace: '{{ Crediantials.FORMS_NEUSTAR_BIZ_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/fishackathon/index.php' , regexp: 'FORMS_NEUSTAR_BIZ_HOST' , replace: '{{ Crediantials.FORMS_NEUSTAR_BIZ_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/HackerNest/index.php' , regexp: 'FORMS_NEUSTAR_BIZ_HOST' , replace: '{{ Crediantials.FORMS_NEUSTAR_BIZ_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/MyConnectedWorld/index.php' , regexp: 'FORMS_NEUSTAR_BIZ_HOST' , replace: '{{ Crediantials.FORMS_NEUSTAR_BIZ_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/podcast/index.php' , regexp: 'FORMS_NEUSTAR_BIZ_HOST' , replace: '{{ Crediantials.FORMS_NEUSTAR_BIZ_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/spaceapps/index.php' , regexp: 'FORMS_NEUSTAR_BIZ_HOST' , replace: '{{ Crediantials.FORMS_NEUSTAR_BIZ_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/src/About/Lookup/GetLookupService.php' , regexp: 'APIGOCO_HOST' , replace: '{{ Crediantials.APIGOCO_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/america/index.php' , regexp: 'APIGOCO_HOST' , replace: '{{ Crediantials.APIGOCO_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/fishackathon/index.php' , regexp: 'APIGOCO_HOST' , replace: '{{ Crediantials.APIGOCO_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/HackerNest/index.php' , regexp: 'APIGOCO_HOST' , replace: '{{ Crediantials.APIGOCO_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/MyConnectedWorld/js/app.js' , regexp: 'APIGOCO_HOST' , replace: '{{ Crediantials.APIGOCO_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/podcast/index.php' , regexp: 'APIGOCO_HOST' , replace: '{{ Crediantials.APIGOCO_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/spaceapps/index.php' , regexp: 'APIGOCO_HOST' , replace: '{{ Crediantials.APIGOCO_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/public/spaceapps/js/app.js' , regexp: 'APIGOCO_HOST' , replace: '{{ Crediantials.APIGOCO_HOST }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/src/About/Controller/ContactController.php' , regexp: 'GOOGLE_SECRECTKEY' , replace: '{{ Crediantials.GOOGLE_SECRECTKEY }}'}
+    - {path: '{{ dest_location }}/{{ File_Num }}/module/About/view/about/contact/index.phtml' , regexp: 'GOOGLE_SITEKEY' , replace: '{{ Crediantials.GOOGLE_SITEKEY }}'}    
+    

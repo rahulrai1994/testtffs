@@ -1,0 +1,4 @@
+---
+   - name: To fnd the builts except for latest 5 and delete them
+     shell: cd {{ dest_location }};ls -t | tail -n +7|grep -v {{ RepoName }}|xargs rm -rf
+

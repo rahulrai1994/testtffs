@@ -1,0 +1,92 @@
+---
+
+- import_playbook: git_pull.yml
+
+- name: To Deploy the code
+  hosts: tag_Application_About_Us
+  vars:
+    dest_location: /var/www/html
+  tasks:
+    - block:
+        - include_role:
+            name: "role"
+          when: BranchName == 'main'
+
+        - name: include tasks for deletion of older builds
+          include_tasks: logs_rotate.yml
+          when: BranchName == 'main'
+
+      rescue:
+        - name: smtp mail
+          mail:
+            host: "{{ lookup('ini' ,'smtp_host section=prod file={{smtp_file}}') }}"
+            port: "{{ lookup('ini' ,'smtp_port section=prod file={{smtp_file}}') }}"
+            username: "{{ lookup('ini' ,'smtp_username section=prod file={{smtp_file}}') }}"
+            password: "{{ lookup('ini' ,'smtp_password section=prod file={{smtp_file}}') }}"
+            from: "{{ lookup('ini' ,'smtp_from section=prod file={{smtp_file}}') }}"
+            to: "{{ lookup('ini' ,'smtp_to section=prod file={{smtp_file}}') }}"
+            cc: "{{ lookup('ini' ,'smtp_cc section=prod file={{smtp_file}}') }}"
+            subject: "Ansible Deployment Failed"
+            subtype: html
+            body: '{{ lookup("template", "/Ansible/Scripts/email.html") }}'
+            secure: starttls
+
+- name: To Deploy the code
+  hosts: tag_Application_About_Us_Redesign
+  vars:
+    dest_location: /var/www/html
+  tasks:
+    - block:
+        - include_role:
+            name: "role"
+          when: BranchName == 'about-us-redesign'
+
+        - name: include tasks for deletion of older builds
+          include_tasks: logs_rotate.yml
+          when: BranchName == 'about-us-redesign'
+      rescue:
+        - name: smtp mail
+          mail:
+            host: "{{ lookup('ini' ,'smtp_host section=prod file={{smtp_file}}') }}"
+            port: "{{ lookup('ini' ,'smtp_port section=prod file={{smtp_file}}') }}"
+            username: "{{ lookup('ini' ,'smtp_username section=prod file={{smtp_file}}') }}"
+            password: "{{ lookup('ini' ,'smtp_password section=prod file={{smtp_file}}') }}"
+            from: "{{ lookup('ini' ,'smtp_from section=prod file={{smtp_file}}') }}"
+            to: "{{ lookup('ini' ,'smtp_to section=prod file={{smtp_file}}') }}"
+            cc: "{{ lookup('ini' ,'smtp_cc section=prod file={{smtp_file}}') }}"
+            subject: "Ansible Deployment Failed"
+            subtype: html
+            body: '{{ lookup("template", "/Ansible/Scripts/email.html") }}'
+            secure: starttls
+
+- name: To increment the counter for next build
+  hosts: localhost
+  vars:
+    smtp_file: /Ansible/Scripts/smtp_pass.txt
+
+  tasks:
+    - name: starting block section
+      block:
+
+      - name: To increase
+        shell: file=$((`cat local_counter.txt` + 1)); echo $file | tee local_counter.txt
+        when: BranchName == 'main'
+
+      - name: To increase
+        shell: file=$((`cat local_counter_redesign.txt` + 1)); echo $file | tee local_counter_redesign.txt
+        when: BranchName == 'about-us-redesign'
+
+      rescue:
+        - name: smtp mail
+          mail:
+            host: "{{ lookup('ini' ,'smtp_host section=prod file={{smtp_file}}') }}"
+            port: "{{ lookup('ini' ,'smtp_port section=prod file={{smtp_file}}') }}"
+            username: "{{ lookup('ini' ,'smtp_username section=prod file={{smtp_file}}') }}"
+            password: "{{ lookup('ini' ,'smtp_password section=prod file={{smtp_file}}') }}"
+            from: "{{ lookup('ini' ,'smtp_from section=prod file={{smtp_file}}') }}"
+            to: "{{ lookup('ini' ,'smtp_to section=prod file={{smtp_file}}') }}"
+            cc: "{{ lookup('ini' ,'smtp_cc section=prod file={{smtp_file}}') }}"
+            subject: "Ansible Deployment Failed"
+            subtype: html
+            body: '{{ lookup("template", "/Ansible/Scripts/email.html") }}'
+            secure: starttls
